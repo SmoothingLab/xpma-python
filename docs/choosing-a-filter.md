@@ -125,6 +125,20 @@ straight-line trends but gently curved (quadratic) ones with no error at all. At
 higher smoothness it is still zero-lag, but it loses that exactness and the
 overshoot grows. The theory page explains this.
 
+### The two XEPMA variants
+
+Two siblings adjust the endpoint's trade in opposite directions, and both keep
+its zero lag:
+
+- **`DampedXEPMA`** is the one to reach for in practice: it gives back a little
+  of the endpoint's trend exactness to reduce the overshoot, at every period and
+  smoothness. If you like `XEPMA`'s speed but its overshoot keeps stinging, try
+  this before abandoning zero lag altogether.
+- **`QuadraticXEPMA`** goes the other way: it restores the curved-trend
+  exactness that plain `XEPMA` only has at smoothness 1, making it exact at
+  every order, but pays in extra noise. It exists because the mathematics allows
+  it; reach for it only when exact curvature tracking matters more than noise.
+
 ## Dialling it yourself: `XPMA`
 
 `XPMA(period, smoothness, lag_reduction)` is the general family that the Fast,
@@ -155,6 +169,7 @@ filling the gap under a single EMA.
 - Reading slope or curvature: **`ConvexFastEMA`** (or `ConvexLeadEMA`).
 - Faster than EMA at the same nominal period (a little more noise), no overshoot: **`FastEMA`**.
 - Oscillator or ratio input, want zero lag, overshoot acceptable: **`XEPMA`**.
+- Zero lag, but the overshoot hurts: **`DampedXEPMA`**.
 - A smoothness between whole numbers: **`IFEMA`**.
 - Explore the lag dial yourself: **`XPMA`**.
 

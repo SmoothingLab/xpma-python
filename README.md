@@ -81,6 +81,8 @@ so read for the job that matches yours rather than top to bottom.
 | `ApexFastEMA(period, smoothness=1)` | The fastest of the no-overshoot filters at a given period: it climbs closest to the level, eases into a small dip just below, then settles. It never crosses above the level, and only just touches it (exactly, only in the idealised continuous limit). |
 | `ApexLeadEMA(period, smoothness=1)` | The lag-matched sibling of `ApexFastEMA`: the EMA's lag with the least undershoot of the lag-matched filters, at the cost of a small dip. |
 | `XEPMA(period, smoothness=1)` | The zero-lag endpoint: it reads the current level and slope and projects them to now, so it has essentially no lag and is the fastest of all, but it can overshoot after a sharp move (that is the trade). Excellent for oscillators, risky as a reference level. |
+| `DampedXEPMA(period, smoothness=1)` | `XEPMA` with the overshoot damped: still zero lag, trading a little trend exactness for reduced overshoot at every period and smoothness. The practical choice when you want the endpoint's speed but the overshoot hurts. |
+| `QuadraticXEPMA(period, smoothness=1)` | `XEPMA` made exact on curved (quadratic) trends at every smoothness, not just smoothness 1, at the cost of extra noise. Mostly of mathematical interest. |
 | `XPMA(period, smoothness, lag_reduction)` | The general family the Fast, Lead, Convex and Apex filters (and the `XEPMA` endpoint) are points on. Dial `lag_reduction` yourself from 0 (plain cascade, most lag) to 1 (the zero-lag `XEPMA`). |
 | `IFEMA(period, smoothness)` | A smoother of any fractional smoothness order, with no lag reduction. Use it for a smoothness between whole numbers; it is also the core the others build on. |
 
