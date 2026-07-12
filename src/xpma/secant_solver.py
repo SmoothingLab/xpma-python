@@ -11,12 +11,19 @@ class SecantSolver:
         self.max_iterations = max_iterations
         self.max_error = max_error
 
-    def solve(self, target: float, estimate: float) -> float:
+    def solve(self, target: float, estimate: float, commit: bool = True) -> float:
+        """Find the input that makes the indicator output `target`.
+
+        With `commit` (the default) the solved input is fed to the indicator via
+        get_next once found, advancing its state; with `commit=False` the state
+        is left untouched (a what-if solve, the reversal analogue of calc_next).
+        """
         if not math.isfinite(target) or not math.isfinite(estimate):
             raise ValueError("Target and estimate must be finite numbers")
 
         if abs(self.indicator.calc_next(estimate) - target) < self.max_error:
-            self.indicator.get_next(estimate)
+            if commit:
+                self.indicator.get_next(estimate)
             return estimate
 
         prev_estimate = None
@@ -43,5 +50,6 @@ class SecantSolver:
         else:
             raise RuntimeError("Max iterations exceeded in SecantSolver")
 
-        self.indicator.get_next(estimate)
+        if commit:
+            self.indicator.get_next(estimate)
         return estimate

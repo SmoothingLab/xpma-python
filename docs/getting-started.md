@@ -93,9 +93,9 @@ print(filt.calc_next(20.0))   # 14.8204... (identical: no state changed)
 print(filt.get_next(13.0))    # 11.8770...
 ```
 
-The probe is what makes filters reversible: given a wanted output, you can solve
-for the input that produces it (see `SecantSolver` in the
-[API reference](api.md) and
+The probe is what makes filters reversible: `ReverseFilter` wraps any filter and
+recovers its input stream from its output stream (see the Reversal section of
+the [API reference](api.md) and
 [`examples/03_streaming_and_probe.py`](../examples/03_streaming_and_probe.py)).
 
 ## Handling missing or bad values

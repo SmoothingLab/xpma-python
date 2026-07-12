@@ -46,7 +46,8 @@ cheap, but lags the data by `(period - 1) / 2` samples in steady state.
 ### `ReverseEMA(period)`
 
 The algebraic inverse of the EMA's update: given an EMA output stream it
-recovers the input. Used inside the fractional smoother and available for
+recovers the input exactly, in closed form (no solver involved; contrast
+`ReverseFilter` below). Used inside the fractional smoother and available for
 building reversible pipelines.
 
 ### `MultiEMA(period, num_smooths)`
@@ -191,12 +192,46 @@ prefer the named filters above, which pass the critical constant for you.
 
 ## Reversal
 
+There are two kinds of reversal in the package, and they are separate for a
+reason. `ReverseEMA` and `ReverseMultiEMA` (above) invert their filters in
+closed form: each recovered input is a direct algebraic rearrangement of the
+filter's update, so they are exact, need no solver and cost one arithmetic step
+per sample. Prefer them whenever the stream you are reversing came from an
+`EMA` or `MultiEMA`. Every other filter has no closed-form inverse and is
+reversed generically, by solving for each input numerically:
+
+### `ReverseFilter(indicator, max_iterations=5, max_error=1e-6)`
+
+Runs any filter in the package backwards: feed it the filter's output stream
+with `get_next` and it returns the recovered input, sample by sample. It has the
+standard interface (`get_next`, `calc_next` as a non-advancing probe, the
+bad-input guard).
+
+- `indicator`: a dedicated instance of the forward filter, constructed with the
+  same parameters (the reversal drives it, so do not pass the instance that is
+  smoothing your live stream).
+- `max_iterations` / `max_error`: the solve budget per sample; it raises
+  `RuntimeError` if a sample fails to converge within it.
+
+```python
+from xpma import DampedXEPMA, ReverseFilter
+
+data = [10.0, 10.4, 10.2, 11.1, 12.3, 11.8, 12.5, 13.0, 12.7, 13.4]
+
+forward = DampedXEPMA(20)
+reverse = ReverseFilter(DampedXEPMA(20))
+
+smoothed = [forward.get_next(x) for x in data]
+recovered = [reverse.get_next(s) for s in smoothed]   # ~= data
+```
+
 ### `SecantSolver(indicator, max_iterations=5, max_error=1e-6)`
 
-Inverts any filter that has both `get_next` and `calc_next`: given a wanted
-output, it finds the input that produces it, committing the final input to the
-filter once it converges (it uses the non-advancing `calc_next` probe while
-iterating).
+The engine underneath `ReverseFilter`, public for when you need a single
+arbitrary solve rather than a stream: given a wanted output, it finds the input
+that produces it, committing the final input to the filter once it converges
+(it uses the non-advancing `calc_next` probe while iterating; pass
+`commit=False` to solve without advancing the filter).
 
 - `indicator`: the filter instance to invert (it must have `get_next` and
   `calc_next`).
