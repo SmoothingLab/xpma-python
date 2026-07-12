@@ -158,4 +158,6 @@ sensibly between `1` and `2`.
 
 - [choosing-a-filter.md](choosing-a-filter.md): which filter for which job.
 - [api.md](api.md): the full reference.
+- [theory.md](theory.md): what is proven versus checked numerically, and where
+  the family comes from.
 - [examples/](../examples/): runnable scripts you can adapt.

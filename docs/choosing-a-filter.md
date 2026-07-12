@@ -58,6 +58,11 @@ So `FastEMA(20)` is faster than `EMA(20)`; `LeadEMA(20)` is exactly as laggy as
 want responsiveness at a chosen smoothing; pick `Lead*` when you have a lag
 budget (often "match my existing EMA") and want the best tracking within it.
 
+The speed is not free: a `Fast*` filter's quicker response passes more of the
+noise through. At period 20 and smoothness 1, `FastEMA` passes about 2.9 times
+the noise energy of `EMA(20)`; the `Lead*` siblings, running at matched lag, pay
+far less.
+
 **`LeadEMA` is the sensible default for reference-level roles.** Matching a
 familiar EMA's lag while tracking closer, and never overshooting, is exactly what
 a centreline or trend anchor wants.
@@ -152,3 +157,9 @@ filling the gap under a single EMA.
 - Oscillator or ratio input, want zero lag, overshoot acceptable: **`XEPMA`**.
 - A smoothness between whole numbers: **`IFEMA`**.
 - Explore the lag dial yourself: **`XPMA`**.
+
+---
+
+**Next:** [api.md](api.md) has the exact signature, parameters and valid ranges
+for whichever filter you have picked; [theory.md](theory.md) explains what is
+proven versus checked numerically behind these recommendations.

@@ -103,8 +103,8 @@ published benchmark report tables it checks its cell means against. That
 reproduction lives with the paper's benchmark materials, not with the library.
 
 One consumer-impact study is also omitted. `verify_zero_order_multiema.py`
-retains its A1 to A8 certification (the exit code) and its S1 study
-(TrendMomentum differential), but a second study exercising a filter that is
+retains its A1 to A8 certification (the exit code) and its S1 study (a
+fast-minus-slow differential built from the shelf and EMA), but a second study exercising a filter that is
 not part of this package's public surface has been removed; it ships with the
 paper materials. No A1 to A8 check was removed, so the certification count is
 unchanged.

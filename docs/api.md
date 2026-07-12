@@ -97,18 +97,15 @@ All are designed for `smoothness >= 1`. A value between 0 and 1 falls back to th
 order-1 filter for `FastEMA`, `LeadEMA` and the `Apex` pair, and raises for
 `ConvexFastEMA` and `ConvexLeadEMA`.
 
-Confidence (all for `smoothness >= 1`): `FastEMA` and `LeadEMA` are **proven**
-overshoot-free (monotone step response) at any period. For the `Convex` and
-`Apex` filters the underlying boundary property is proven (`Convex`, in the
-continuous limit) or exact (`Apex`, confirmed symbolically); what rests on
-**numerical evidence** is only their no-overshoot safety at a finite period (see
-[theory.md](theory.md)).
+What is proven versus checked numerically for these filters is summarised in
+[theory.md](theory.md).
 
 ### `FastEMA(period, smoothness=1)`
 
 Same nominal period as `EMA(period)`, less lag. Rises straight to a new level
-(monotone), no overshoot. The faster response passes more noise (at period 20,
-smoothness 1, about 2.9 times the EMA's noise energy). Exposes `lag_reduction`,
+(monotone), no overshoot. The faster response passes more noise than
+`EMA(period)` (quantified in [choosing-a-filter.md](choosing-a-filter.md)).
+Exposes `lag_reduction`,
 `ma_lag` and `time_lag` attributes; these are exact at whole-number smoothness,
 and at fractional smoothness they describe the ideal filter rather than the
 blended instance actually run (they differ by a fraction of a sample).
@@ -134,9 +131,7 @@ The lag-matched sibling of `ConvexFastEMA`.
 
 The fastest of the no-overshoot filters at a given period: it climbs closest to
 the level, then dips just below before settling (not monotone). It never crosses
-above the level; it grazes the level exactly only in the idealised continuous
-limit, and at a finite period approaches without quite reaching it (about 0.986
-of the way at period 20, smoothness 1).
+above the level.
 
 ### `ApexLeadEMA(period, smoothness=1)`
 
@@ -151,10 +146,8 @@ filters, at the cost of the same small dip.
 
 The zero-lag endpoint of the family: a level-plus-trend nowcast with essentially
 no lag at any smoothness. **It can overshoot after a sharp move; that is the
-intrinsic cost of zero lag.** At `smoothness = 1` it reproduces not just
-straight-line trends but curved (quadratic) ones exactly (it is quadratic-exact
-there). Excellent as an oscillator, poor as a reference level (use `LeadEMA`
-there).
+intrinsic cost of zero lag.** Excellent as an oscillator, poor as a reference
+level (use `LeadEMA` there).
 
 ### `QuadraticXEPMA(period, smoothness=1)`
 
@@ -268,3 +261,10 @@ from xpma import r_crit_m, r_crit_c, r_crit_o
 r_crit_c(1), r_crit_m(1), r_crit_o(1)   # 0.4618..., 0.5602..., 0.6796...  (C < M < O)
 ```
 
+
+---
+
+**Next:** [theory.md](theory.md) for the ideas behind the family and what is
+proven versus checked numerically; [../examples/](../examples/) for runnable
+scripts to adapt. If you have not chosen a filter yet, start with
+[choosing-a-filter.md](choosing-a-filter.md).

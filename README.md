@@ -121,8 +121,6 @@ every smoothness order 1 and above, including order 1 itself:
   no-overshoot property at a finite period is backed by **numerical evidence**
   (tested for smoothness 1 to 4 and periods 5 to 200), not a full proof.
 
-So none of these is "proven only above smoothness 1": the underlying properties
-hold at every order including 1, and what is numerical is finite-period safety.
 If you need the guarantee to hold absolutely, prefer `FastEMA` or `LeadEMA`.
 `XEPMA` overshoots by design: that is the price of its zero lag. The repository
 ships a machine-checkable `proofs/` tree (see [proofs/README.md](proofs/README.md))

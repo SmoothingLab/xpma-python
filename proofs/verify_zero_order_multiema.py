@@ -18,7 +18,7 @@ ReverseEMA(q) is the exact algebraic inverse of EMA(q) (a 2-tap FIR with transfe
 This script verifies the closed form and its moment properties numerically
 (A1-A8 below), quantifies the shelf filter's accuracy against EIFEMA (the exact
 fractional cascade), evaluates two moment-exact replacements C1 / C2, and prints
-the consumer-impact study S1 (TrendMomentum differential). The zero-order shelf
+the consumer-impact study S1 (a fast-minus-slow differential). The zero-order shelf
 is rebuilt from EMA / ReverseEMA primitives (ZeroOrderShelf); A6 verifies the
 IFEMA C1 branch on (0, 1), and A8 verifies the compound-Poisson s -> 0 limit
 structure.
@@ -612,10 +612,10 @@ for s in SGRID:
           f"{row(21,s,'C2')['l1']:>10.3e}")
 
 # ----------------------------------------------------------------------------
-# S1: TrendMomentum-style differential fast - slow = order0(p) - EMA(p).
+# S1: fast-minus-slow differential, fast - slow = order0(p) - EMA(p).
 # ----------------------------------------------------------------------------
 print("\n" + "=" * 78)
-print("S1  TrendMomentum differential: order0(p) - EMA(p) on GBM (p=21)")
+print("S1  fast-minus-slow differential: order0(p) - EMA(p) on GBM (p=21)")
 print("=" * 78)
 P_S1 = 21
 rng = np.random.default_rng(424242)
