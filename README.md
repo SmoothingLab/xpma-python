@@ -134,7 +134,8 @@ The theory is written up in:
 
 > Marcus Don, *Maximal monotone lag reduction in exponentially weighted
 > smoothers: the two-rate discounted-regression family and its critical
-> reductions* (2026). Preprint forthcoming; Zenodo DOI: _to be assigned_.
+> reductions* (2026). DOI:
+> [10.5281/zenodo.21343537](https://doi.org/10.5281/zenodo.21343537).
 
 ## Licence
 

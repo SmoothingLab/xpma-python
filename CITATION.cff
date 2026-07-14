@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: >-
-  If you use this software, please cite it (details below). A paper is
-  forthcoming; once it has a DOI, please cite that instead.
+  If you use this software, please cite the paper given under
+  preferred-citation below.
 title: xpma
 abstract: >-
   Exponentially weighted smoothers with independent control of smoothness and
@@ -10,7 +10,8 @@ abstract: >-
 type: software
 authors:
   - family-names: Don
-    given-names: Marcus
+    given-names: Marcus John Hendry
+    orcid: "https://orcid.org/0009-0000-9187-1853"
 license: MIT
 year: 2026
 repository-code: "https://github.com/SmoothingLab/xpma-python"
@@ -21,6 +22,7 @@ preferred-citation:
     two-rate discounted-regression family and its critical reductions
   authors:
     - family-names: Don
-      given-names: Marcus
+      given-names: Marcus John Hendry
+      orcid: "https://orcid.org/0009-0000-9187-1853"
   year: 2026
-  notes: "Preprint forthcoming; Zenodo DOI to be assigned."
+  doi: 10.5281/zenodo.21343537
