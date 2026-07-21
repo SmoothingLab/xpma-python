@@ -14,7 +14,10 @@ authors:
     orcid: "https://orcid.org/0009-0000-9187-1853"
 license: MIT
 year: 2026
+version: 0.1.0
+date-released: "2026-07-21"
 repository-code: "https://github.com/SmoothingLab/xpma-python"
+repository-artifact: "https://pypi.org/project/xpma/"
 preferred-citation:
   type: article
   title: >-
