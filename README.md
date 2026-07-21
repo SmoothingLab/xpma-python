@@ -37,7 +37,7 @@ The plotting in two of the examples needs `matplotlib`, which you can pull in
 with the optional `examples` extra (it also installs `numpy`):
 
 ```bash
-pip install ".[examples]"
+pip install "xpma[examples]"
 ```
 
 The library itself never needs either.
