@@ -27,13 +27,10 @@ cost, this is that toolbox.
 
 ## Install
 
-The package is pure Python (no compiled parts, no required dependencies). Until
-it is published to a package index, install it straight from the repository:
+The package is pure Python (no compiled parts, no required dependencies):
 
 ```bash
-git clone https://github.com/SmoothingLab/xpma-python.git
-cd xpma-python
-pip install .
+pip install xpma
 ```
 
 The plotting in two of the examples needs `matplotlib`, which you can pull in
@@ -132,9 +129,9 @@ that verifies the paper's claims.
 
 The theory is written up in:
 
-> Marcus Don, *Maximal monotone lag reduction in exponentially weighted
-> smoothers: the two-rate discounted-regression family and its critical
-> reductions* (2026). DOI:
+> Marcus John Hendry Don, *Maximal monotone lag reduction in exponentially
+> weighted smoothers: the two-rate discounted-regression family and its
+> critical reductions* (2026). DOI:
 > [10.5281/zenodo.21343537](https://doi.org/10.5281/zenodo.21343537).
 
 ## Licence

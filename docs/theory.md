@@ -123,9 +123,9 @@ prefer `FastEMA` or `LeadEMA` if you need the proven version.
 
 ## Where to go for the full story
 
-- The paper: Marcus Don, *Maximal monotone lag reduction in exponentially
-  weighted smoothers: the two-rate discounted-regression family and its critical
-  reductions* (2026; DOI:
+- The paper: Marcus John Hendry Don, *Maximal monotone lag reduction in
+  exponentially weighted smoothers: the two-rate discounted-regression family
+  and its critical reductions* (2026; DOI:
   [10.5281/zenodo.21343537](https://doi.org/10.5281/zenodo.21343537)). It gives
   the derivations, the connections to the classical smoothers (Brown, Holt,
   Tillson), and the benchmark results.

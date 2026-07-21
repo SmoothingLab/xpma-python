@@ -9,7 +9,7 @@ description = "Exponentially weighted zero-lag smoothers and technical-analysis 
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
-authors = [{ name = "Marcus Don", email = "marcus@smoothinglab.com" }]
+authors = [{ name = "Marcus John Hendry Don", email = "marcus@smoothinglab.com" }]
 keywords = [
     "signal-processing",
     "smoothing",
